@@ -71,3 +71,18 @@ def apply_framecurve_from_file():
     selected = filter(lambda n: n.Class() != "Viewer" and n.name() != "VIEWER_INPUT", nuke.selectedNodes())
     for n in selected:
         apply_framecurve(n, framecurve_path)
+        
+def export_kronos_as_framecurve():
+    kronos = nuke.selectedNode()
+    frame_k = kronos["frame"]
+    
+    fc_path = nuke.getFilename("Name the framecurve file to write to", "*.framecurve.txt", default="/", favorites="", type="", multiple=False)
+    
+    from_f = nuke.root()["first_frame"].getValue()
+    to_f = nuke.root()["last_frame"].getValue()
+    frames = xrange(int(from_f), int(to_f) + 1)
+    fmt =  "%d\t%0.5f\n"
+    with open(fc_path, "w") as fc_file:
+        for frame in frames:
+            v = frame_k.getValueAt(frame)
+            fc_file.write(fmt % (frame, v))
