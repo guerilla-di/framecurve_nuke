@@ -86,3 +86,4 @@ def export_kronos_as_framecurve():
         for frame in frames:
             v = frame_k.getValueAt(frame)
             fc_file.write(fmt % (frame, v))
+
