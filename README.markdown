@@ -4,7 +4,7 @@ First of all, you will need our python script. [Download the .py](framecurve_nuk
 
 Add it to your Nuke's `menu.py` script using import, like so:
 
-	sys.path.append("/path/to/the/directory/where/projectionist/is/in")
+	sys.path.append("/path/to/the/directory/where/framecurve_nuke/is/in")
 	import framecurve_nuke
 
 ## Basic commands
@@ -41,7 +41,8 @@ If you want to export a Framecurve file from an arbitrary knob, right-click on t
 
 ## The Python module
 
-These scripts use the [framecurve_python](http://github.com/guerilla-di/framecurve_python) library by Ben Dickinson, and this library is awesome.
+These scripts use the [framecurve_python](http://github.com/guerilla-di/framecurve_python) library by Ben Dickson.
+That library is truly awesome and if you want to do anything sophisticated related to Framecurves we suggest you check it out.
 
 ## License
 

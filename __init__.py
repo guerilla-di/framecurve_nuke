@@ -32,7 +32,7 @@ def make_keyframes_linear(knob):
 
 def animate_framecurve_from_file(fc_path, to_node):
     with open(fc_path) as fc_file:
-        # Validate the framecurve first
+        validate_stream(fc_file)
         curve = framecurve.parse(fc_file)
         load_curve_into_knob(curve, to_node["framecurve"])
 
@@ -77,6 +77,12 @@ def load_curve_into_knob(framecurve, knob):
     for correlation in framecurve.frames():
         knob.setValueAt(correlation.value, correlation.at) #, index=1, view=1)
     make_keyframes_linear(knob)
+
+def validate_stream(fc_stream):
+    validator = framecurve.validate(fc_stream)
+    if len(validator.errors) == 0:
+        return
+    raise Exception("The framecurve file had problems: " + "\n".join(validator.errors))
     
 def load_framecurve_into_focused_knob():
     """
@@ -89,6 +95,7 @@ def load_framecurve_into_focused_knob():
         return
     
     with open(framecurve_path) as fc_file:
+        validate_stream(fc_file)
         curve = framecurve.parse(fc_file)
         knob_names = nuke.animations() # Returns the animations names under this knob
         for knob_name_with_suffix in knob_names:
