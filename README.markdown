@@ -1,6 +1,6 @@
 # Framecurve Nuke module
 
-First of all, you will need our python script. [Download the .py](framecurve_nuke/raw/master/scripts/applyFramecurve.py)
+First of all, you will to download the whole repository. [Download the .zip](https://github.com/guerilla-di/framecurve_nuke/zipball/master)
 
 Add it to your Nuke's `menu.py` script using import, like so:
 
