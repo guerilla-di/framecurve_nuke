@@ -13,13 +13,16 @@ This will create a Framecurve menu in your Nodes toolbar, and add a couple of co
 
 ![Framecurve toolbar](framecurve_nuke/raw/master/images/nuke_fc_toolbar.png)
 
-Select a node in Nuke, and pick **Load a framecurve from file and apply to selected node**
+Select a node in Nuke, and pick **Load a framecurve from file and apply to selected node.**
+
 A dialog will pop out prompting you to select your framecurve file.
 
 ![Framecurve file selector](framecurve_nuke/raw/master/images/nuke_fc_selectfile.png)
 
 After the file is chosen the module will create a knob called **framecurve** in your node, and populate it with
 keyframes from the framecurve file.
+
+If your framecurve file is in any way problematic, the import process will show you all the issues encountered.
 
 ![Framecurve knob with animation](framecurve_nuke/raw/master/images/nuke_fc_knob.png)
 
