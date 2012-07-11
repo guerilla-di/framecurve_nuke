@@ -32,8 +32,7 @@ def make_keyframes_linear(knob):
 
 def animate_framecurve_from_file(fc_path, to_node):
     with open(fc_path) as fc_file:
-        validate_stream(fc_file)
-        curve = framecurve.parse(fc_file)
+        curve = load_and_validate_stream(fc_file)
         load_curve_into_knob(curve, to_node["framecurve"])
 
 def apply_timewarps_to_knobs(inNode):
@@ -67,22 +66,23 @@ def apply_framecurve_from_selected_files_to_selected_nodes():
     for n in selected:
         apply_framecurve(n, framecurve_path)
 
-def load_curve_into_knob(framecurve, knob):
+def load_curve_into_knob(curve, knob):
     """
     Load a passed framecurve.Curve object into the passed Knob object, resetting
     all the animations
     """
     knob.clearAnimated()
     knob.setAnimated()
-    for correlation in framecurve.frames():
+    for correlation in framecurve.simplify(curve):
         knob.setValueAt(correlation.value, correlation.at) #, index=1, view=1)
     make_keyframes_linear(knob)
 
-def validate_stream(fc_stream):
-    validator = framecurve.validate(fc_stream)
-    if len(validator.errors) == 0:
-        return
-    raise Exception("The framecurve file had problems: " + "\n".join(validator.errors))
+def load_and_validate_stream(fc_stream):
+    parsed_curve = framecurve.parse(fc_stream)
+    validator = framecurve.validate(curve = parsed_curve)
+    if not validator.ok:
+        raise Exception("The framecurve file had problems: " + "\n".join(validator.errors))
+    return parsed_curve
     
 def load_framecurve_into_focused_knob():
     """
@@ -95,8 +95,7 @@ def load_framecurve_into_focused_knob():
         return
     
     with open(framecurve_path) as fc_file:
-        validate_stream(fc_file)
-        curve = framecurve.parse(fc_file)
+        curve = load_and_validate_stream(fc_file)
         knob_names = nuke.animations() # Returns the animations names under this knob
         for knob_name_with_suffix in knob_names:
             # Since the names are like "translate.x" what we gotta do is to chop off the suffix
@@ -121,7 +120,7 @@ def export_framecurve_from_this_knob():
         for curve in nuke.animations():
             for frame in all_script_frames():
                 fc.append(framecurve.FrameCorrelation(at=frame, value=this_knob.getValueAt(frame)))
-            framecurve.serialize(fc_file, fc)
+            framecurve.serialize(fc_file, framecurve.simplify(fc))
                   
 # Unfortunately we CANNOT specify a function callback as something that goes into the Animation menu, we have
 # to do it with a function path as a string. This should be filed as a Nuke bug.
