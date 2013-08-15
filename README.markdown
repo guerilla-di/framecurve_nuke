@@ -5,8 +5,7 @@ and unarchive it somewhere where you store your Nuke tricks (like `~/.nuke`)
 
 Add it to your Nuke's `menu.py` script using import, like so:
 
-	sys.path.append("/path/to/the/directory/where/framecurve_nuke/is/in")
-	import framecurve_nuke
+	nuke.addPluginPath("/path/to/framecurve_nuke")
 
 ## Basic commands
 
