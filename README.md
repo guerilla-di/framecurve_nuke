@@ -12,7 +12,7 @@ Add it to your Nuke's `menu.py` script using import, like so:
 This will create a Framecurve menu in your Nodes toolbar, and add a couple of commands to the Animation context menu popup
 (this is the thing that appears when you right-click a knob).
 
-![Framecurve toolbar](framecurve_nuke/raw/master/images/nuke_fc_toolbar.png)
+![Framecurve toolbar](images/nuke_fc_toolbar.png)
 
 Select a node in Nuke, and pick **Load a framecurve from file and apply to selected node.**
 
