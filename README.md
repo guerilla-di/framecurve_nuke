@@ -18,19 +18,19 @@ Select a node in Nuke, and pick **Load a framecurve from file and apply to selec
 
 A dialog will pop out prompting you to select your framecurve file.
 
-![Framecurve file selector](framecurve_nuke/raw/master/images/nuke_fc_selectfile.png)
+![Framecurve file selector](images/nuke_fc_selectfile.png)
 
 After the file is chosen the module will create a knob called **framecurve** in your node, and populate it with
 keyframes from the framecurve file.
 
 If your framecurve file is in any way problematic, the import process will stop and show you all the issues encountered.
 
-![Framecurve knob with animation](framecurve_nuke/raw/master/images/nuke_fc_knob.png)
+![Framecurve knob with animation](images/nuke_fc_knob.png)
 
 After the retiming curve has been imported, the script will walk all of your knobs in the node,
 and for each animated knob it will apply a timewarp expression which looks like this:
 
-![Retiming expression](framecurve_nuke/raw/master/images/nuke_fc_expressions.png)
+![Retiming expression](images/nuke_fc_expressions.png)
 
 ...and every animation in your node will become Framecurve-enabled and retimed. 
 
@@ -43,7 +43,7 @@ If you only want to setup your node to handle the timewarp without loading any f
 If you want to export a Framecurve file from an arbitrary knob, right-click on that knob and use the **Framecurve** menu.
 It's up to you to select a single-dimension knob of course (what would life on Earth be like if we had two-dimensional timewarps?)
 
-![Knob menu](framecurve_nuke/raw/master/images/nuke_fc_anim_menu.png)
+![Knob menu](images/nuke_fc_anim_menu.png)
 
 ## The Python module
 
